@@ -1,0 +1,16 @@
+# knot-control-source
+
+KNoT Control is part of KNoT project. It is a service daemon running in KNoT gateway and is responsible for controlling the execution and configuration of all other services/daemons running in the gateway.
+
+Dependencies:
+glib >= 2.28
+automake
+libtool
+
+How to install dependencies:
+	sudo apt-get install automake libtool glib2.0
+
+How to build:
+```shell
+ ./bootstrap-configure --enable-debug --disable-optimization && make
+```
