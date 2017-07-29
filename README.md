@@ -10,7 +10,7 @@ How to install dependencies:
 
 How to build (daemon):
 ```shell
- $ gcc -o knotctld src/main.c
+ $ gcc $(pkg-config --cflags glib-2.0) -Wall -Werror -Wextra -Wno-unused-parameter -o knotctld src/main.c $(pkg-config --libs glib-2.0)
 ```
 
 How to build (CLI):
