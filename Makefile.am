@@ -8,9 +8,10 @@ AM_LDFLAGS = $(BUILD_LDFLAGS)
 bin_PROGRAMS = src/knotctld tools/knotctl
 
 src_knotctld_SOURCES = src/main.c
-src_knotctld_LDADD = @GLIB_LIBS@
+src_knotctld_LDADD = @GLIB_LIBS@ @GIO_UNIX_LIBS@
 src_knotctld_LDFLAGS = $(AM_LDFLAGS)
-src_knotctld_CFLAGS = $(AM_CFLAGS) @GLIB_CFLAGS@
+src_knotctld_CFLAGS = $(AM_CFLAGS) @GLIB_CFLAGS@ \
+								@GIO_UNIX_CFLAGS@
 
 tools_knotctl_SOURCES = tools/knotctl.c
 tools_knotctl_LDADD = @GLIB_LIBS@
