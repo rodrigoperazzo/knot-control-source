@@ -1,0 +1,92 @@
+
+knotctl D-Bus API description
+**************************
+
+
+Manager hierarchy
+=================
+Service 	org.cesar.knot.control
+Interface 	org.cesar.knot.control.Manager
+Object path 	/org/cesar/knot/control
+
+Methods void Up(void)
+
+            Starts all gateway services (fog, knot, radio, ...).
+
+            Possible errors: org.cesar.knot.control.Error.AlreadyRunning
+                             org.cesar.knot.control.Error.NotReady
+
+        void Down(void)
+
+            Stops all gateway services (fog, knot, radio, ...).
+
+            Possible errors: org.cesar.knot.control.Error.NotRunning
+
+        void Apply(void)
+
+            Starts or Reloads any service that can be impacted by one or
+            more set methods called before (eg: SetUser, SetGateway, ...).
+
+        boolean Status(string service)
+
+            Returns if service requested (fog, knot, radio, ...) is running
+            or not.
+
+            Possible errors: org.cesar.knot.control.Error.InvalidArguments
+
+        boolean SetUser(string uuid, string token)
+
+            Saves user's credentials to be used on requests to cloud by other
+            services. Apply() method should be called to reload any service
+            that depends on this information.
+
+            Returns if information was saved successfully.
+
+            Possible errors: org.cesar.knot.control.Error.InvalidArguments
+                             org.cesar.knot.control.Error.NotAllowed
+
+         boolean SetGateway(string uuid, string token)
+
+             Saves gateway's credentials to be used on requests to cloud by
+             other services. Apply() method should be called to reload any
+             service that depends on this information.
+
+             Returns if information was saved successfully.
+
+             Possible errors: org.cesar.knot.control.Error.InvalidArguments
+                              org.cesar.knot.control.Error.NotAllowed
+
+          boolean SetCloud(string address, int port)
+
+              Saves address and port to be used on all requests to cloud.
+              Apply() method should be called to reload any service that
+              depends on this information.
+
+              Returns if information was saved successfully.
+
+              Possible errors: org.cesar.knot.control.Error.InvalidArguments
+                               org.cesar.knot.control.Error.NotAllowed
+
+Properties string UserUUID [readonly]
+
+                The User's uuid on cloud.
+
+           string UserToken [readonly]
+
+                The User's session token provided by cloud.
+
+           string GatewayUUID [readonly]
+
+                The Gateway's uuid on cloud.
+
+           string GatewayToken [readonly]
+
+                The Gateway's token on cloud.
+
+           string CloudAddress [readonly]
+
+                The cloud's IP address.
+
+           string CloudPort [readonly]
+
+                The cloud's http port to be used on request.
